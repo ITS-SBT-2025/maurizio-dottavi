@@ -4,7 +4,8 @@
   "description": "dfgsdfgsd",
   "main": "index.js",
   "scripts": {
-    "test": "dir"
+    "prod": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "",
   "license": "ISC",
