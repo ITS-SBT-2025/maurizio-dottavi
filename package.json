@@ -1,0 +1,14 @@
+{
+  "name": "libreria",
+  "version": "1.0.0",
+  "description": "dfgsdfgsd",
+  "main": "index.js",
+  "scripts": {
+    "test": "dir"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
