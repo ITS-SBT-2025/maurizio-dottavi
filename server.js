@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express();
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs').promises;
 
 
 app.use("/", express.static(path.join(__dirname, "/public"), { "extensions": ["html"] }));
@@ -79,7 +79,7 @@ app.get('/books', getBooks);
 function getBooks(req, res) {
     let autore = req.query.autore;
     let titolo = req.query.titolo;
-    let data = BooksSync(autore,titolo );
+    let data = BooksAsync(autore,titolo );
     console.log("=======================");
     console.log(data);
     console.log("=======================");
@@ -106,6 +106,55 @@ function BooksSync(a,t) {
     }
     return data;
 }
+
+function BooksAsync(a,t) {
+    const data = [];
+    try {
+         fs.readFile(path.join(__dirname, 'data/books.dat'), (err, content) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            console.log(content);
+            /*content.split("\n").forEach((line) => {
+            const [title, author] = line.split(";");
+            if (title && author) {
+                console.log(`Nome: ${title}, Autore: ${author}`);
+                data.push({ title, author });
+            }
+                */
+       
+            console.log("ABBIAMO LETTO IL FILE");
+        });
+        console.log("DOPO LA LETTURA");
+
+
+    } catch (err) {
+        console.error(err);
+    }
+    return data;
+}
+
+async function BooksAwait(a,t) {
+    const data = [];
+    try {
+        let content = await fs.readFile(path.join(__dirname, 'data/books.dat'), 'utf8');
+        console.log(content);
+        content.split("\n").forEach((line) => {
+            const [title, author] = line.split(";");
+            if (title && author) {
+                console.log(`Nome: ${title}, Autore: ${author}`);
+                data.push({ title, author });
+            }
+        });
+
+    } catch (err) {
+        console.error(err);
+    }
+    return data;
+}
+
+
 
 
 app.listen(3000);
