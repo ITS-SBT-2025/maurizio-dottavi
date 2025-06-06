@@ -1,12 +1,24 @@
 const express = require('express')
-const app = express()
+const app = express();
+const path=require('path');
+const fs=require('fs');
+
+
+app.use("/",express.static(path.join(__dirname,"/public"), {"extensions":["html"]}));
+
+
 app.get('/', function (req, res) {
   res.send('Hello World')
 });
 
-app.get('/books', function (req, res) {
-    let autore=req.query.autore;
+
+function cercaLibri  (req, res) {
+    let autore=req.params.autore;
     let titolo=req.query.titolo;
+
+    if (req.params.autore) {
+        autore=req.query.autore;
+    }
     
     let parametri_di_ricerca=[];
 
@@ -25,7 +37,9 @@ app.get('/books', function (req, res) {
     }
     
   res.send('Ecco la lista dei libri per la ricerca:' + queryfinale);
-});
+}
+
+app.get('/books', cercaLibri);
 
 
 app.get('/booksuuu', function (req, res) {
@@ -46,7 +60,7 @@ function getLibro (req,res){
         res.send("libro NON trovato");
     }
 }
-
+app.get('/books/:autore',cercaLibri) ;
 app.get('/books/:idlibro',getLibro) ;
 app.get('/books/ciao', function (req, res) {
   res.send('Quest è Ciao');
