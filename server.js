@@ -5,7 +5,7 @@ const fs=require('fs');
 
 
 app.use("/",express.static(path.join(__dirname,"/public"), {"extensions":["html"]}));
-
+app.use(express.urlencoded());
 
 app.get('/', function (req, res) {
   res.send('Hello World')
@@ -45,9 +45,7 @@ app.get('/books', cercaLibri);
 app.get('/booksuuu', function (req, res) {
   res.send('Ecco la lista dei libri')
 });
-app.post('/books', function (req, res) {
-  res.send('Ho modificato il tuo libro')
-});
+
 
 function getLibro2 (req,res){
    res.send("Qui non passo mai");
@@ -66,6 +64,15 @@ app.get('/books/ciao', function (req, res) {
   res.send('Quest è Ciao');
 });
 app.get('/books/:idlibro',getLibro2) ;
+
+
+app.post('/books', function (req, res) {
+  let a=req.body.autore;
+  let t=req.body.titolo;
+  
+
+  res.send('Ho creato il tuo libro: ' + t + " scritto da " + req.body.autore);
+});
 
 
 app.listen(3000);
