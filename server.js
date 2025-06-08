@@ -5,7 +5,9 @@ const fs = require('fs').promises;
 
 
 app.use("/", express.static(path.join(__dirname, "/public"), { "extensions": ["html"] }));
+
 app.use(express.urlencoded());
+app.use(express.json());
 
 app.get('/', function (req, res) {
     res.send('Hello World')
@@ -68,11 +70,12 @@ app.post('/books', function (req, res) {
     let a = req.body.autore;
     let t = req.body.titolo;
 
-
     res.send('Ho creato il tuo libro: ' + t + " scritto da " + req.body.autore);
 });
 
-app.get('/books', getBooks);
+app.get('/books', cercaLibri);
+
+
 
 async function getBooks(req, res) {
     let autore = req.query.autore;
@@ -132,6 +135,8 @@ function BooksAsync(a,t) {
     }
     return data;
 }
+
+
 
 async function BooksAwait(a,t) {
     const data = [];
