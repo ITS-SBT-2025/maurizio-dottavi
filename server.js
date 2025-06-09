@@ -27,10 +27,11 @@ function miomw(req, res, next) {
 app.get('/', miomw, function (req, res) {
     //console.log("Cookies:", req.cookies.__cf_bm);
     //console.log("Cookies:", req.cookies.__cfruid);
-//    if (typeof(req.cookies.authenticato) === 'undefined') {
+    console.log("Cookies authenticato:", req.cookies.authenticato);
+    if (typeof(req.cookies.authenticato) === 'undefined') {
         res.cookie('authenticato', 'maurizio', { maxAge: 900000, httpOnly: true });
         console.log("Cookie authenticato impostato");
-  //  }
+    }
     
     res.send('Hello World')
 });
