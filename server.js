@@ -2,12 +2,15 @@ const express = require('express')
 const app = express();
 const path = require('path');
 const fs = require('fs').promises;
-
+const cookieParser = require('cookie-parser');
+const morgan = require('morgan');
 
 app.use("/", express.static(path.join(__dirname, "/public"), { "extensions": ["html"] }));
 
 app.use(express.urlencoded());
 app.use(express.json());
+app.use(cookieParser());
+app.use(morgan('combined'));
 
 app.use(miomw);
 function miomw(req, res, next) {
@@ -22,6 +25,13 @@ function miomw(req, res, next) {
 
 
 app.get('/', miomw, function (req, res) {
+    //console.log("Cookies:", req.cookies.__cf_bm);
+    //console.log("Cookies:", req.cookies.__cfruid);
+//    if (typeof(req.cookies.authenticato) === 'undefined') {
+        res.cookie('authenticato', 'maurizio', { maxAge: 900000, httpOnly: true });
+        console.log("Cookie authenticato impostato");
+  //  }
+    
     res.send('Hello World')
 });
 
