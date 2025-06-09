@@ -6,12 +6,16 @@
   "scripts": {
     "prod": "node index.js",
     "dev": "nodemon server.js",
-    "test": "nodemon app.js"
+    "test": "nodemon app.js",
+    "apptest": "set NODE_ENV=dev&&nodemon app/app.js",
+    "appprod": "set NODE_ENV=prod&&nodemon app/app.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "config": "^4.0.0",
     "cookie-parser": "^1.4.7",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
     "morgan": "^1.10.0",
