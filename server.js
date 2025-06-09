@@ -10,7 +10,7 @@ app.use("/", express.static(path.join(__dirname, "/public"), { "extensions": ["h
 app.use(express.urlencoded());
 app.use(express.json());
 app.use(cookieParser());
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 
 app.use(miomw);
 function miomw(req, res, next) {
