@@ -9,7 +9,19 @@ app.use("/", express.static(path.join(__dirname, "/public"), { "extensions": ["h
 app.use(express.urlencoded());
 app.use(express.json());
 
-app.get('/', function (req, res) {
+app.use(miomw);
+function miomw(req, res, next) {
+    console.log("Richiesta ricevuta: metodo="+req.method+" url=", req.url, );
+    if (req.method != "POST" && req.method != "GET") {
+        res.status(405);
+        res.send("Metodo non supportato");
+    }
+    next();
+}
+
+
+
+app.get('/', miomw, function (req, res) {
     res.send('Hello World')
 });
 
