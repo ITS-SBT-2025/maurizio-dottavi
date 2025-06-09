@@ -66,16 +66,23 @@ app.get('/books/ciao', function (req, res) {
 app.get('/books/:idlibro', getLibro2);
 
 
-app.post('/books', function (req, res) {
+app.post('/books', creaLibro);
+
+app.get('/books', getBooks);
+
+async function creaLibro (req, res) {
+    if (!req.body.autore || !req.body.titolo) {
+        res.status(400).send("Errore: Devi specificare autore e titolo del libro");
+        return;
+    }
     let a = req.body.autore;
     let t = req.body.titolo;
+    const data = await BooksAwait();
+    data.push({ title: t, author: a });
+    SaveBooks(data);
 
     res.send('Ho creato il tuo libro: ' + t + " scritto da " + req.body.autore);
-});
-
-app.get('/books', cercaLibri);
-
-
+}
 
 async function getBooks(req, res) {
     let autore = req.query.autore;
@@ -136,8 +143,6 @@ function BooksAsync(a,t) {
     return data;
 }
 
-
-
 async function BooksAwait(a,t) {
     const data = [];
     try {
@@ -155,6 +160,19 @@ async function BooksAwait(a,t) {
         console.error(err);
     }
     return data;
+}
+
+async function SaveBooks(data) {
+    try {
+        let content = "";
+        data.forEach( (item) => {
+            content += `${item.title};${item.author}\n`;
+        })
+        await fs.writeFile(path.join(__dirname, 'data/books.dat'), content, 'utf8');
+
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 
