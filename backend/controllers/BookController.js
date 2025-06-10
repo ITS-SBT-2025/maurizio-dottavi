@@ -16,9 +16,13 @@ class BookController {
         }
         // Chiama il servizio per la ricerca dei libri
         let data = await BookService.search(autore, titolo);
-        //res.json(data);
+        if (req.headers.accept && req.headers.accept.includes('application/json')) {
+            res.json(data);
+        } else {    
+            res.render('listBook', { title: 'Libri', books: data });
+        }
         
-        res.render('listBook', { title: 'Libri', books: data });
+        //res.render('listBook', { title: 'Libri', books: data });
         //res.render('listBook', { title: 'Libri', books: data });
     };
 

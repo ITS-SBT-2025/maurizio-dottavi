@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <script src="/js/script.js"></script>
     <title>Ristorante < Pinkopallo</title>
 </head>
 <body>
     <h1>Welcome to Libreria Pinkopallo</h1>
     <img src="/images/pinkopallo_logo.png" alt="Ristorante Pinkopallo Logo" style="width:200px;height:auto;">
     <p>Enjoy our books and cozy atmosphere.</p>  
+
+        <input type="text" id="titolo" name="titolo" placeholder="Search per titolo...">
+        <input type="text" id="autore" name="autore" placeholder="Search per autore...">
+        <button onClick="queryBooks();">Search</button>
+
+    <div id="result"/>
     <footer>
         <p>© 2025 Ristorante Pinkopallo</p>
         <p>Contact us at: <a href="mailto:pinkopallo@gmail.com">pinkopallo@gmail.com</a>
