@@ -1,0 +1,9 @@
+{
+    "storage": "db",
+    "database": {
+        "host": "my.web.server.com",
+        "port": 5432,
+        "user": "adminuser"
+    },
+    "DataFile": "data/books.dat"
+}

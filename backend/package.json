@@ -1,0 +1,22 @@
+{
+  "name": "libreria",
+  "version": "1.0.0",
+  "description": "dfgsdfgsd",
+  "main": "index.js",
+  "scripts": {
+    "dev": "set NODE_ENV=dev&&nodemon ./app.js",
+    "prod": "set NODE_ENV=prod&&nodemon ./app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^4.0.0",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^16.5.0",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.10"
+  }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Modulo di Contatto</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f0f0f0;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <img src="/images/logo.jpg"/>
+  <h2 style="text-align: center;">Crea Libro</h2>
+
+  <form action="/books" method="post">
+    <label for="nome">Titolo:</label>
+    <input type="text" id="titolo11111" name="titolo" required>
+
+    <label for="email">Autore:</label>
+    <input type="test" id="autore111111" name="autore" required>
+
+    <button type="submit">Invia</button>
+  </form>
+
+</body>
+</html>
