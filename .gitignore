@@ -1,4 +1,4 @@
 node_modules/
-data/
+sessions.db
 .env
 app/models/data/
