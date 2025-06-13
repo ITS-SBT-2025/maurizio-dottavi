@@ -3,6 +3,12 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 const helmet = require('helmet');
+const passport = require('passport');
+const session = require('express-session');
+
+const SQLiteStore = require('connect-sqlite3')(session); 
+
+const AuthController = require('../controllers/AuthController');
 
 // Funzione middleware per configurare l'app Express
 function middleware(app,express) {
@@ -20,6 +26,41 @@ function middleware(app,express) {
     app.use(morgan("combined"));
     // Abilita alcune protezioni di sicurezza HTTP
     app.use(helmet());
+
+   
+    app.use(session({
+        //  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
+        secret: 'il mio segreto di pulcinella',
+        resave: false,
+        saveUninitialized: false,
+        name: 'TOKEN',
+        store: new SQLiteStore({ db: 'sessions.db', dir: './data/' })
+    }));
+    
+    /*   */
+    
+    
+    function sessionMonitor(req, res, next) {
+        console.log("SESSION: ", req.session);
+        if (typeof(req.session.views) !== 'undefined') {
+            req.session.views++;
+        } else {
+            req.session.views = 1;
+        }    
+        if (typeof(req.session.pageview) !== 'undefined') {
+            req.session.views++;
+            req.session.pageview.push(req.url);
+        } else {
+            req.session.pageview = [req.url];
+        }
+        next();    
+    }
+
+    app.use(sessionMonitor); // Middleware per monitorare le sessioni
+    /*
+    app.use(passport.initialize());
+    app.use(AuthController.isAuthenticated); // Middleware per verificare l'autenticazione dell'utente
+    */
    
 }
 

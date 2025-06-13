@@ -1,5 +1,7 @@
 // Importa il controller dei libri
 const BooksController = require('../controllers/BookController');
+const AuthController = require('../controllers/AuthController');
+
 
 // Definisce tutte le rotte dell'applicazione
 function routes(app) {
@@ -7,6 +9,12 @@ function routes(app) {
     app.get('/', function (req, res) {
         res.send('Hello to my Library');
     });
+
+    /*
+    app.get('/login', AuthController.login);
+    app.post('/login', AuthController.login);
+    app.get('/logout', AuthController.logout);
+    */
 
     // Middleware di test per loggare le richieste
     function test (req, res, next) {
@@ -23,6 +31,7 @@ function routes(app) {
     app.post('/books/:idlibro', BooksController.updateBook);
     // Rotta per cancellare un libro tramite id (DELETE /books/:idlibro)
     app.delete('/books/:idlibro', BooksController.deleteBook);
+    app.get('/testsession', BooksController.testsession);
 
 }
 

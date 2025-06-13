@@ -3,7 +3,10 @@ const BookService = require('../main/BookService');
 
 class BookController {
     // Metodo per cercare libri tramite query string (autore, titolo)
+
     static async searchBooks(req, res) {
+        console.log("SESSION: ", req.session);
+
         let autore = null;
         let titolo = null;
         // Controlla se è stato passato l'autore nella query
@@ -18,10 +21,10 @@ class BookController {
         let data = await BookService.search(autore, titolo);
         if (req.headers.accept && req.headers.accept.includes('application/json')) {
             res.json(data);
-        } else {    
+        } else {
             res.render('listBook', { title: 'Libri', books: data });
         }
-        
+
         //res.render('listBook', { title: 'Libri', books: data });
         //res.render('listBook', { title: 'Libri', books: data });
     };
@@ -76,7 +79,7 @@ class BookController {
             res.json(theBook);
         } else {
             res.status(400);
-            res.send("Bas Request: Devi specificare l'ID ("+req.params.idlibro+") del libro il nuovo titolo ("+req.body.title+") e l'autore ("+req.body.author+")");
+            res.send("Bas Request: Devi specificare l'ID (" + req.params.idlibro + ") del libro il nuovo titolo (" + req.body.title + ") e l'autore (" + req.body.author + ")");
         }
 
     };
@@ -96,6 +99,10 @@ class BookController {
             res.status(400);
             res.send("Bas Request: Devi specificare l'ID del libro");
         }
+    };
+
+    static async testsession(req, res) {
+        res.send("Test sessione eseguito con successo"+ JSON.stringify(req.session));
     };
 
 }

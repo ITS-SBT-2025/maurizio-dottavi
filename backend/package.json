@@ -11,12 +11,17 @@
   "license": "ISC",
   "dependencies": {
     "config": "^4.0.0",
+    "connect-sqlite3": "^0.9.15",
     "cookie-parser": "^1.4.7",
     "dotenv": "^16.5.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-session": "^1.18.1",
     "helmet": "^8.1.0",
     "morgan": "^1.10.0",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
+    "passport-local": "^1.0.0"
   }
 }
