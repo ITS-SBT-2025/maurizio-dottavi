@@ -5,5 +5,11 @@
         "port": 5432,
         "user": "dev_user"
     },
-    "DataFile": "data/books.dat"
+    "DataFile": "data/books.dat",
+    "serverKey": "config/app-server.key",
+    "serverCert": "config/app-server.crt",
+
+    "secret_key": "12345678901234567",
+    "secret_iv":  "12345678901234567"
+
 }
