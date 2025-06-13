@@ -6,8 +6,8 @@
         "user": "adminuser"
     },
     "DataFile": "data/books.dat",
-    "serverKey": "config/app-server.key",
-    "serverCert": "config/app-server.crt",
+    "chiaveprivata": "config/app-server.key",
+    "certificato": "config/app-server.crt",
 
     "secret_key": "12345678901234567",
     "secret_iv":  "12345678901234567"    
