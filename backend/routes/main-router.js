@@ -1,14 +1,23 @@
 // Importa il controller dei libri
 const BooksController = require('../controllers/BookController');
 const AuthController = require('../controllers/AuthController');
+const HomeController = require('../controllers/HomeController');
 
 
 // Definisce tutte le rotte dell'applicazione
 function routes(app) {
     // Rotta principale: messaggio di benvenuto
     app.get('/', function (req, res) {
-        res.send('Hello to my Library');
+        res.render('homepage');
     });
+
+    app.get('/register', AuthController.registerPage);
+    app.post('/register', AuthController.register);
+    app.get('/login', AuthController.loginPage);
+    app.post('/login', AuthController.login);
+    app.get('/logout', AuthController.logout);
+
+    app.get('/home', AuthController.isAuthenticated, HomeController.home);
 
     /*
     app.get('/login', AuthController.login);

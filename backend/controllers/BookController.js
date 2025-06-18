@@ -102,6 +102,11 @@ class BookController {
     };
 
     static async testsession(req, res) {
+        if (req.session && req.session.pageviews){
+            req.session.pageviews++;
+        } else {
+             req.session.pageviews=1
+        }
         res.send("Test sessione eseguito con successo"+ JSON.stringify(req.session));
     };
 

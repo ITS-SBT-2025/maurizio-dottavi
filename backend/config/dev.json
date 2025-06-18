@@ -6,10 +6,8 @@
         "user": "dev_user"
     },
     "DataFile": "data/books.dat",
+    "UserDataFile": "data/users.dat",
     "chiaveprivata": "config/app-server.key",
-    "certificato": "config/app-server.crt",
-
-    "secret_key": "12345678901234567",
-    "secret_iv":  "12345678901234567"
+    "certificato": "config/app-server.crt"
 
 }

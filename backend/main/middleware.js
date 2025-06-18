@@ -27,7 +27,7 @@ function middleware(app,express) {
     // Abilita alcune protezioni di sicurezza HTTP
     app.use(helmet());
 
-   
+    
     app.use(session({
         //  store: new SQLiteStore({ db: 'sessions.db', dir: './var/db' })
         secret: 'il mio segreto di pulcinella',
@@ -37,11 +37,13 @@ function middleware(app,express) {
         store: new SQLiteStore({ db: 'sessions.db', dir: './data/' })
     }));
     
-    /*   */
-    
+    app.use(passport.initialize());
+    app.use(passport.session());
     
     function sessionMonitor(req, res, next) {
         console.log("SESSION: ", req.session);
+        console.log("USER: ", req.user);
+        /*
         if (typeof(req.session.views) !== 'undefined') {
             req.session.views++;
         } else {
@@ -53,14 +55,14 @@ function middleware(app,express) {
         } else {
             req.session.pageview = [req.url];
         }
+            */
         next();    
     }
 
-    app.use(sessionMonitor); // Middleware per monitorare le sessioni
-    /*
-    app.use(passport.initialize());
-    app.use(AuthController.isAuthenticated); // Middleware per verificare l'autenticazione dell'utente
-    */
+    // Middleware per monitorare le sessioni
+    app.use(sessionMonitor); 
+
+    //app.use(AuthController.isAuthenticated); // Middleware per verificare l'autenticazione dell'utente
    
 }
 
